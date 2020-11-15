@@ -1,0 +1,38 @@
+<div *ngIf="contact">
+    <h1 *ngIf="isNewContact">
+        Create new contact
+    </h1>
+    <h1 *ngIf="!isNewContact">
+        Edit contact
+    </h1>
+    <hr>
+    <div *ngIf="!isNewContact">
+        <label>id:
+            {{contact.id}}
+          </label>
+    </div>
+    <div>
+        <label>name:
+          <input [(ngModel)]="contact.name" placeholder="name"/>
+        </label>
+    </div>
+    <div>
+        <label>address:
+          <input [(ngModel)]="contact.address" placeholder="address"/>
+        </label>
+    </div>
+    <div>
+        <label>email:
+          <input [(ngModel)]="contact.email" placeholder="email"/>
+        </label>
+    </div>
+    <div>
+        <label>phone:
+          <input [(ngModel)]="contact.phone" placeholder="phone"/>
+        </label>
+    </div>
+
+    <hr>
+    <button (click)="navigateBack()">Back</button>
+    <button (click)="saveContact()">Save</button>
+</div>
