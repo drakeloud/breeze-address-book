@@ -6,27 +6,52 @@
         Edit contact
     </h1>
     <hr>
-    <div class="form-group" *ngIf="!isNewContact">
-        <label>Id</label>
-        {{contact.id}}
-    </div>
-    <div class="form-group">
-        <label>Name</label>
-        <input type="text" class="form-control" [(ngModel)]="contact.name" placeholder="Enter Name">
-    </div>
-    <div class="form-group">
-        <label>Address</label>
-        <input type="text" class="form-control" [(ngModel)]="contact.address" placeholder="Enter Address">
-    </div>
-    <div class="form-group">
-        <label>Email</label>
-        <input type="email" class="form-control" [(ngModel)]="contact.email" placeholder="Enter Email">
-    </div>
-    <div class="form-group">
-        <label>Phone</label>
-        <input type="tel" class="form-control" [(ngModel)]="contact.phone" placeholder="Enter Phone">
-    </div>
-    <hr>
-    <button class="btn-spacing btn btn-secondary" (click)="navigateBack()">Back</button>
-    <button class="btn-spacing btn btn-primary" (click)="saveContact()">Save</button>
+    <form (ngSubmit)="onSubmit()" #contactForm="ngForm">
+        <div class="form-group" *ngIf="!isNewContact">
+            <label>Id</label>
+            {{contact.id}}
+        </div>
+        <div class="form-group">
+            <label>Name</label>
+            <input required type="text" class="form-control" [(ngModel)]="contact.name" placeholder="Enter Name" #name="ngModel" name="name">
+            <div [hidden]="name.valid || name.pristine"
+                class="alert alert-danger">
+                Name is required
+            </div>
+        </div>
+        <div class="form-group">
+            <label>Address</label>
+            <input required type="text" class="form-control" [(ngModel)]="contact.address" placeholder="Enter Address" #address="ngModel" name="address">
+            <div [hidden]="address.valid || address.pristine"
+                class="alert alert-danger">
+                Address is required
+            </div>
+        </div>
+        <div class="form-group">
+            <label>Email</label>
+            <input required type="email" class="form-control" [(ngModel)]="contact.email" placeholder="Enter Email" #email="ngModel" name="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$">
+            <div [hidden]="email.valid || email.pristine">
+                <div *ngIf="email.errors?.required" class="alert alert-danger">
+                    Email is required
+                </div>
+                <div *ngIf="email.errors?.pattern" class="alert alert-danger">
+                    Email is not valid
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label>Phone</label>
+            <input required type="tel" class="form-control" [(ngModel)]="contact.phone" placeholder="Enter Phone" #phone="ngModel" name="phone" pattern="^\d{10}$">
+            <div [hidden]="phone.valid || phone.pristine">
+                <div *ngIf="phone.errors?.required" class="alert alert-danger">
+                    Phone is required
+                </div>
+                <div *ngIf="phone.errors?.pattern" class="alert alert-danger">
+                    Phone can only contain digits and must be ten digits long. Example: 1112223333
+                </div>
+            </div>
+        </div>
+        <hr>
+        <button class="btn-spacing btn btn-primary" [disabled]="!contactForm.form.valid" (click)="saveContact()">Save</button>
+    </form>
 </div>
