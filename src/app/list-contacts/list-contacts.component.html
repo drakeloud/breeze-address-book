@@ -1,15 +1,15 @@
 <div>
     <h1>Contacts</h1>
     <hr>
-    <button (click)="addContact()">Add new contact</button>
+    <button type="button" class="btn btn-primary"  (click)="addContact()">Add new contact</button>
     <hr>
     <ng-container *ngFor="let contact of contacts">
         <div><strong>Name:</strong> {{contact.name}}</div>
         <div><strong>Address:</strong> {{contact.address}}</div>
         <div><strong>Email:</strong> {{contact.email}}</div>
         <div><strong>Phone:</strong> {{contact.phone}}</div>
-        <button (click)=editContact(contact.id)>Edit Contact</button>
-        <button (click)="deleteContact(contact.id)">Delete Contact</button>
+        <button type="button" class="btn-spacing btn btn-secondary" (click)=editContact(contact.id)>Edit Contact</button>
+        <button type="button" class="btn-spacing btn btn-danger" (click)="deleteContact(contact.id)">Delete Contact</button>
         <hr>
     </ng-container>
 </div>
