@@ -41,8 +41,4 @@ export class AdministerContactsComponent implements OnInit {
     this.contactsService.save(this.contact, this.isNewContact);
     this.router.navigate(['']);
   }
-
-  public navigateBack(): void {
-    this.router.navigate(['']);
-  }
 }
